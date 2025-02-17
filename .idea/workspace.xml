@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f188c67-76bb-4f20-afb5-a0a2934675b4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/numerical_modeling_of_shallow_water_equations_above_a_bottom_step.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rusanov_scheme.py" afterDir="false" />
+    <list default="true" id="4f188c67-76bb-4f20-afb5-a0a2934675b4" name="Changes" comment="initial conditions and start rusanov scheme">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rusanov_scheme.py" beforeDir="false" afterPath="$PROJECT_DIR$/rusanov_scheme.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;uryadova1&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/uryadova1/practical_assignment_6th_semester.git&quot;,
+    &quot;accountId&quot;: &quot;2371d80e-aa71-4595-9a7e-bc30c3727f39&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -42,9 +48,15 @@
   "keyToString": {
     "Python.rusanov_scheme.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/numerical_modeling_of_shallow_water_equations_above_a_bottom_step"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\PycharmProjects\numerical_modeling_of_shallow_water_equations_above_a_bottom_step" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="rusanov_scheme" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="numerical_modeling_of_shallow_water_equations_above_a_bottom_step" />
@@ -90,14 +102,35 @@
       <option name="presentableId" value="Default" />
       <updated>1739163052073</updated>
     </task>
+    <task id="LOCAL-00001" summary="initial conditions and start rusanov scheme">
+      <option name="closed" value="true" />
+      <created>1739445192286</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739445192286</updated>
+    </task>
+    <task id="LOCAL-00002" summary="initial conditions and start rusanov scheme">
+      <option name="closed" value="true" />
+      <created>1739445326895</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739445326895</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial conditions and start rusanov scheme" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial conditions and start rusanov scheme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/rusanov_scheme.py</url>
-          <line>53</line>
+          <line>74</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

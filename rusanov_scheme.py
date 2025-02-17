@@ -21,17 +21,43 @@ def F_func(q, u, g, h):
     return F
 
 
-def rusanov_scheme(u, f, q, h, R, dots):
-    u_j12_1 = np.zeros(dots, dtype=float)
-    for i in range(2, dots - 1):
-        u_j12_1[i] = (u[i] - u[i - 1]) / 2 - R * (f[i + 1] - f[i]) / 3  # что такое R?
-    u_j_2 = np.zeros(dots, dtype=float)
-    f = F_func(q, u_j12_1, g, h)
-    for i in range(2, dots - 1):
-        u_j_2[i] = u[i] - 2 / 3 * R * (f[i])
+def rusanov_scheme(un, fn, q, h, R, dots, C):
+    u_j12 = np.zeros(dots, dtype=float)
+    u_j12[0] = un[0]
+    for i in range(1, dots - 1):
+        u_j12[i] = (un[i] - un[i - 1]) / 2 - R * (fn[i + 1] - fn[i]) / 3
+    # ______________________________________ t/3
 
+    u2 = np.zeros(dots, dtype=float)
+    u2[0] = un[0]
+    f1 = F_func(q, u_j12, g, h)
+    for i in range(1, dots - 1):
+        u2[i] = un[i] - 2 / 3 * R * (f1[i + 1] - f1[i - 1])
+    # ______________________________________ 2t/3
 
-# ______________________________________________________ вот тут пока вопрос
+    u_n_plus_1 = np.zeros(dots, dtype=float)
+    f2 = F_func(q, u2, g, h)
+    w = np.zeros(dots, dtype=float)
+    w[0] = un[0]
+    w[1] = un[1]
+    for i in range(2, dots - 2):
+        w[i] = un[i + 2] - 4 * un[i + 1] + 6 * un[i] - 4 * un[i - 1] + un[i - 2]
+
+    for i in range(2, dots - 2):
+        u_n_plus_1 = un[i] - R * (7 / 24 * (fn[i + 1] - fn[i - 1]) - 1 / 12 * (fn[i + 2] - fn[i - 2])) - 3 * 8 * R * (
+                    f2[i + 1] - f2[i - 1]) - C * w / 24
+    #че то на границах надо сделать
+    return u_n_plus_1
+
+def runge_error(u_h, u_h2, p):
+    error = np.linalg.norm(u_h2[::2] - u_h, ord=2) / (2**p - 1)
+    return error
+
+def compute_order(u_h, u_h2, u_exact):
+    error_h = np.linalg.norm(u_h - u_exact, ord=2)
+    error_h2 = np.linalg.norm(u_h2[::2] - u_exact, ord=2)
+    p = np.log2(abs(error_h / error_h2))
+    return abs(p)
 
 
 if __name__ == "__main__":
@@ -47,8 +73,10 @@ if __name__ == "__main__":
     g = 10
     x_start = -5  # int(input())
     x_end = x_start + X
+    n = 1000
+    delta_x = X / n
 
-    x0 = np.linspace(x_start, x_end, 1000)
+    x0 = np.linspace(x_start, x_end, n)
     # bx = np.array([h1 if xi < 0 else h0 for xi in x0])
     u = initial_condition_u(a, x0, X)  # скорость??
     u[0] = 0
@@ -60,6 +88,7 @@ if __name__ == "__main__":
     U0 = np.vstack((h, q))  # функция, которая задает матрицу (h q)^T
 
     CFL = 0.5
-    delta_t = CFL * (X / len(x0)) / max(u + (h1 - h0) ** (1 / 2))
+    delta_t = CFL * (X / len(x0)) / max(u + (g * (h1 - h0)) ** (1 / 2))
+    R = delta_t / delta_x
     print(delta_t)
 # _____________________________________________________________________________
