@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+file = open("tmp.txt", "w")
+
 def exact_solution_u(a, x0, X, t, c):
     return a * np.sin(2 * np.pi * (x0 - c * t) / X + np.pi / 4)
 
@@ -26,7 +28,9 @@ def step(x):
 
 def F_func(q, h):
     global g
-    return np.array(q ** 2 / h + g * h ** 2 / 2) #приведено к виду q^2/h+gh^2/2, чтобы не использовать u
+    # tmp = np.array(q ** 2 / h + g * h ** 2 / 2)
+    # print(tmp, file=file)
+    return np.array(q ** 2 / h + g * h ** 2 / 2)  #приведено к виду q^2/h+gh^2/2, чтобы не использовать u
 
 
 def rusanov_scheme(q_n, h_n, u_n, R, C, n): #сама схема
@@ -61,7 +65,7 @@ def rusanov_scheme(q_n, h_n, u_n, R, C, n): #сама схема
     h_3[2:-2] = h_n[2:-2] - R * (7 / 24 * (q_n[:-4] - q_n[1:-3]) - (2 / 24) * (q_n[:-4] - q_n[2:-2])) - 3 / 8 * R * (
             q_2[:-4] - q_2[1:-3]) - w * C / 24
     q_3[2:-2] = q_n[2:-2] - R * ((7 / 24) * (f_1[:-4] - f_1[1:-3]) - (2 / 24) * (f_1[:-4] - f_1[2:-2])) - 3 / 8 * R * (
-            f_2[:-4] - f_2[1:-3]) - w * C / 24
+            f_2[:-4] - f_2[1:-3]) - w * 0.102
 
     h_3[0], q_3[0] = h_2[0], q_2[0]  # восстанавливаем 2 первых и последних узла (надо 3?)
     h_3[-1], q_3[-1] = h_2[-1], q_2[-1]
@@ -136,11 +140,11 @@ def rusanov_scheme_for_different_time_limits(a, b, C, X, x_start, x_end, T, CFL,
         u_n2 = q_n2 / h_n2
 
     # _____________________________________________________________________________
-    h_exact = exact_solution_h(a, x0, X, T1, C, b)
-    p_h = compute_order(h_n, h_n2, h_exact)
-    print(p_h)
+    # h_exact = exact_solution_h(a, x0, X, T1, C, b)
+    p_h = 3 #compute_order(h_n, h_n2, h_exact)
+    # print(p_h)
     rung_error = runge_error(h_n, h_n2, p_h)
-    print(rung_error)
+    print(f"runge error: {rung_error}")
 
     x_step = np.linspace(x_start, x_end, 1000)
     step_graph = step(x_step)
@@ -148,8 +152,8 @@ def rusanov_scheme_for_different_time_limits(a, b, C, X, x_start, x_end, T, CFL,
     plt.figure(figsize=(10, 6))
     plt.plot(x_step, step_graph, label="step", linestyle="--")
     plt.plot(x0, h_n, label="n", linestyle="dotted")
-    plt.plot(x0, h_exact, label="exact", linestyle="dotted")
-    # plt.plot(x02, h_n2, label="2n", linestyle="dotted")
+    # plt.plot(x0, h_exact, label="exact", linestyle="dotted")
+    plt.plot(x02, h_n2, label="2n", linestyle="dotted")
     plt.xlabel("x")
     plt.ylabel("u(x, t)")
     plt.legend()
@@ -162,7 +166,7 @@ if __name__ == "__main__":
     b = 10
     X = 10  #
     C = 0.5  # float(input())
-    n0 = 19  # int(input())
+    n0 = 15  # int(input())
     g = 10
 
     T1 = 0.5  #
