@@ -21,23 +21,25 @@ def initial_condition_h(b, u):
 
 
 def step(x):
-    return [5 if x[i] <= 0 else 1 for i in range(len(x))]
+    return [5 if x[i] <= 0 else 1 for i in range(len(x))] #задаем ступеньку, нужно чтобы потом график нарисовать
 
 
 def F_func(q, h):
     global g
-    return np.array(q ** 2 / h + g * h ** 2 / 2)
+    return np.array(q ** 2 / h + g * h ** 2 / 2) #приведено к виду q^2/h+gh^2/2, чтобы не использовать u
 
 
-def rusanov_scheme(q_n, h_n, u_n, R, C, n):
+def rusanov_scheme(q_n, h_n, u_n, R, C, n): #сама схема
     # print(f"hn: {len(h_n)} qn: {len(q_n)} un: {len(u_n)}")
-    f_1 = F_func(q_n, h_n)
+
+    f_1 = F_func(q_n, h_n) #задаем q^2/h+gh^2/2
+
     # print(f"f1: {len(f_1)}")
     h_1 = np.zeros(n, dtype=float)
     q_1 = np.zeros(n, dtype=float)
     h_1[1:] = (h_n[:-1] + h_n[1:]) / 2 - R * (q_n[1:] - q_n[:-1]) / 3  # n - 1
     q_1[1:] = (q_n[:-1] - q_n[1:]) / 2 - R * (f_1[1:] - f_1[:-1])
-    h_1[0], q_1[0] = h_n[0], q_n[0] #восстанавливаем узел 0
+    h_1[0], q_1[0] = h_n[0], q_n[0]  # восстанавливаем узел 0
 
     # print(f"h1: {len(h_1)} q1: {len(q_1)}")
 
@@ -47,12 +49,12 @@ def rusanov_scheme(q_n, h_n, u_n, R, C, n):
     # print(f"h2: {len(h_2)} q2: {len(q_2)} f2: {len(f_2)}")
     h_2[1:-1] = h_n[1:-1] - 2 / 3 * R * (q_1[1:-1] - q_1[2:])
     q_2[1:-1] = q_n[1:-1] - 2 / 3 * R * (f_1[2:] - f_1[:-2])  # n-2
-    h_2[0], q_2[0] = h_1[0], q_1[0] #восстанавливаем первый и последний узел
+    h_2[0], q_2[0] = h_1[0], q_1[0]  # восстанавливаем первый и последний узел
     h_2[-1], q_2[-1] = h_1[-1], q_1[-1]
 
     w = np.zeros(n - 4, dtype=float)
     for k in range(2, n - 4):
-        w[k] = u_n[k + 2] - 4 * u_n[k + 1] + 6 * u_n[k] - 4 * u_n[k - 1] + u_n[k - 2]
+        w[k] = u_n[k + 2] - 4 * u_n[k + 1] + 6 * u_n[k] - 4 * u_n[k - 1] + u_n[k - 2] #только ради этого таскаем за собой в функцию вектор u
 
     h_3 = np.zeros(n, dtype=float)
     q_3 = np.zeros(n, dtype=float)
@@ -61,7 +63,7 @@ def rusanov_scheme(q_n, h_n, u_n, R, C, n):
     q_3[2:-2] = q_n[2:-2] - R * ((7 / 24) * (f_1[:-4] - f_1[1:-3]) - (2 / 24) * (f_1[:-4] - f_1[2:-2])) - 3 / 8 * R * (
             f_2[:-4] - f_2[1:-3]) - w * C / 24
 
-    h_3[0], q_3[0] = h_2[0], q_2[0] #восстанавливаем 2 первых и последних узла
+    h_3[0], q_3[0] = h_2[0], q_2[0]  # восстанавливаем 2 первых и последних узла (надо 3?)
     h_3[-1], q_3[-1] = h_2[-1], q_2[-1]
     h_3[1], q_3[1] = h_2[1], q_2[1]
     h_3[-2], q_3[-2] = h_2[-2], q_2[-2]
@@ -81,7 +83,7 @@ def compute_order(u_h, u_h2, u_exact):
     return abs(p)
 
 
-def rusanov_scheme_for_different_time_limits(a, b, X, x_start, x_end, T, CFL, n0):
+def rusanov_scheme_for_different_time_limits(a, b, C, X, x_start, x_end, T, CFL, n0):
     n = n0  # int(input('n: '))
     delta_x = X / n
 
@@ -117,7 +119,6 @@ def rusanov_scheme_for_different_time_limits(a, b, X, x_start, x_end, T, CFL, n0
     h02 = initial_condition_h(b, u02)
 
     q02 = h02 * u02
-    f02 = F_func(q02, h02)
 
     CFL = 0.5
     lambda12 = max(abs(u02 - (g * h02) ** 0.5))
@@ -147,28 +148,30 @@ def rusanov_scheme_for_different_time_limits(a, b, X, x_start, x_end, T, CFL, n0
     plt.figure(figsize=(10, 6))
     plt.plot(x_step, step_graph, label="step", linestyle="--")
     plt.plot(x0, h_n, label="n", linestyle="dotted")
-    plt.plot(x02, h_n2, label="2n", linestyle="dotted")
+    plt.plot(x0, h_exact, label="exact", linestyle="dotted")
+    # plt.plot(x02, h_n2, label="2n", linestyle="dotted")
     plt.xlabel("x")
     plt.ylabel("u(x, t)")
     plt.legend()
     plt.grid()
     plt.show()
 
+
 if __name__ == "__main__":
     a = 2
     b = 10
     X = 10  #
     C = 0.5  # float(input())
+    n0 = 19  # int(input())
+    g = 10
 
     T1 = 0.5  #
     T2 = 1
     T3 = 2
     h1 = 5
     h0 = 1
-    g = 10
     x_start = -5  # int(input())
     x_end = x_start + X
-    n0 = 10  # int(input())
     CFL = 0.5
-    rusanov_scheme_for_different_time_limits(a, b, X, x_start, x_end, T1, CFL, n0) #чтобы можно было запустить для любого Т
-
+    rusanov_scheme_for_different_time_limits(a, b, C, X, x_start, x_end, T1, CFL,
+                                             n0)  # чтобы можно было запустить для любого Т
