@@ -2,17 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-file = open("tmp.txt", "w")
-
-def exact_solution_u(a, x0, X, t, c):
-    return a * np.sin(2 * np.pi * (x0 - c * t) / X + np.pi / 4)
-
-
-def exact_solution_h(a, x0, X, t, c, b):
-    global g
-    return (exact_solution_u(a, x0, X, t, c) + b) ** 2 / (4 * g)
-
-
 def initial_condition_u(a, x0, X):
     return a * np.sin(2 * np.pi * x0 / X + np.pi / 4)
 
@@ -80,12 +69,6 @@ def runge_error(u_h, u_h2, p):
     return error
 
 
-def compute_order(u_h, u_h2, u_exact):
-    error_h = np.linalg.norm(u_h - u_exact, ord=2)
-    error_h2 = np.linalg.norm(u_h2[::2] - u_exact, ord=2)
-    p = np.log2(abs(error_h / error_h2))
-    return abs(p)
-
 
 def rusanov_scheme_for_different_time_limits(a, b, C, X, x_start, x_end, T, CFL, n0):
     n = n0  # int(input('n: '))
@@ -140,9 +123,7 @@ def rusanov_scheme_for_different_time_limits(a, b, C, X, x_start, x_end, T, CFL,
         u_n2 = q_n2 / h_n2
 
     # _____________________________________________________________________________
-    # h_exact = exact_solution_h(a, x0, X, T1, C, b)
-    p_h = 3 #compute_order(h_n, h_n2, h_exact)
-    # print(p_h)
+    p_h = 3
     rung_error = runge_error(h_n, h_n2, p_h)
     print(f"runge error: {rung_error}")
 
@@ -152,7 +133,6 @@ def rusanov_scheme_for_different_time_limits(a, b, C, X, x_start, x_end, T, CFL,
     plt.figure(figsize=(10, 6))
     plt.plot(x_step, step_graph, label="step", linestyle="--")
     plt.plot(x0, h_n, label="n", linestyle="dotted")
-    # plt.plot(x0, h_exact, label="exact", linestyle="dotted")
     plt.plot(x02, h_n2, label="2n", linestyle="dotted")
     plt.xlabel("x")
     plt.ylabel("u(x, t)")

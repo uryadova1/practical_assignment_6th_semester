@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f188c67-76bb-4f20-afb5-a0a2934675b4" name="Changes" comment="rusanov scheme pre final1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rusanov_scheme.py" beforeDir="false" afterPath="$PROJECT_DIR$/rusanov_scheme.py" afterDir="false" />
-    </list>
+    <list default="true" id="4f188c67-76bb-4f20-afb5-a0a2934675b4" name="Changes" comment="third order" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742380452429</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="third order">
+      <option name="closed" value="true" />
+      <created>1742386417983</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742386417983</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,7 +166,8 @@
     <MESSAGE value="rusanov scheme a lil bit done)))" />
     <MESSAGE value="rusanov scheme pre final" />
     <MESSAGE value="rusanov scheme pre final1" />
-    <option name="LAST_COMMIT_MESSAGE" value="rusanov scheme pre final1" />
+    <MESSAGE value="third order" />
+    <option name="LAST_COMMIT_MESSAGE" value="third order" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
