@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f188c67-76bb-4f20-afb5-a0a2934675b4" name="Changes" comment="third order" />
+    <list default="true" id="4f188c67-76bb-4f20-afb5-a0a2934675b4" name="Changes" comment="third order1">
+      <change afterPath="$PROJECT_DIR$/rusanov_scheme_different_conditionals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rusanov_scheme.py" beforeDir="false" afterPath="$PROJECT_DIR$/rusanov_scheme.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,9 +48,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.rusanov_scheme.executor": "Run",
+    "Python.rusanov_scheme_different_conditionals.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/User/PycharmProjects/numerical_modeling_of_shallow_water_equations_above_a_bottom_step"
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/numerical_modeling_of_shallow_water_equations_above_a_bottom_step",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -54,7 +60,7 @@
       <recent name="C:\Users\User\PycharmProjects\numerical_modeling_of_shallow_water_equations_above_a_bottom_step" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.rusanov_scheme_different_conditionals">
     <configuration name="rusanov_scheme" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="numerical_modeling_of_shallow_water_equations_above_a_bottom_step" />
       <option name="ENV_FILES" value="" />
@@ -77,8 +83,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="rusanov_scheme_different_conditionals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="numerical_modeling_of_shallow_water_equations_above_a_bottom_step" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rusanov_scheme_different_conditionals.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.rusanov_scheme_different_conditionals" />
         <item itemvalue="Python.rusanov_scheme" />
       </list>
     </recent_temporary>
@@ -147,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742386417983</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="third order1">
+      <option name="closed" value="true" />
+      <created>1742386740950</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742386740950</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,15 +204,21 @@
     <MESSAGE value="rusanov scheme pre final" />
     <MESSAGE value="rusanov scheme pre final1" />
     <MESSAGE value="third order" />
-    <option name="LAST_COMMIT_MESSAGE" value="third order" />
+    <MESSAGE value="third order1" />
+    <option name="LAST_COMMIT_MESSAGE" value="third order1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/rusanov_scheme.py</url>
-          <line>179</line>
+          <line>219</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/rusanov_scheme_different_conditionals.py</url>
+          <line>78</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
