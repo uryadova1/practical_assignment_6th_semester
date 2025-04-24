@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f188c67-76bb-4f20-afb5-a0a2934675b4" name="Changes" comment="17.04.2025">
-      <change afterPath="$PROJECT_DIR$/cabaret_scheme.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rusanov_scheme.py" beforeDir="false" afterPath="$PROJECT_DIR$/rusanov_scheme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rusanov_scheme_different_conditions.py" beforeDir="false" afterPath="$PROJECT_DIR$/rusanov_scheme_different_conditions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

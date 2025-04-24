@@ -54,8 +54,8 @@ def an_sol_problem_1(x, h1, h0, q1, q0, T):
 
 def rusanov_scheme_p(q_n, h_n, R, C, n):
     # вот здесь периодические условия
-    h_n = np.concatenate([[h_n[n - 2]], [h_n[n - 1]], h_n, [h_n[1]], [h_n[2]]])
-    q_n = np.concatenate([[q_n[n - 2]], [q_n[n - 1]], q_n, [q_n[1]], [q_n[2]]])
+    h_n = np.concatenate([[h_n[n - 3]], [h_n[n - 2]], h_n, [h_n[1]], [h_n[2]]])
+    q_n = np.concatenate([[q_n[n - 3]], [q_n[n - 2]], q_n, [q_n[1]], [q_n[2]]])
 
     f_1 = F_func(q_n, h_n)  # задаем q^2/h+gh^2/2
 
