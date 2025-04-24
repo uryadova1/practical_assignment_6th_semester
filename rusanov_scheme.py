@@ -118,8 +118,8 @@ def calculate_p(h1, h2, h3, q1, q2, q3):
     q2 = np.array(q2[::2])
     q3 = np.array(q3[::4])
 
-    norm1 = ((h1 - h2)**2 + (q1-q2)**2)**(1/2)
-    norm2 = ((h2 - h3)**2 + (q2-q3)**2)**(1/2)
+    norm1 = ((h1 - h2) ** 2 + (q1 - q2) ** 2) ** (1 / 2)
+    norm2 = ((h2 - h3) ** 2 + (q2 - q3) ** 2) ** (1 / 2)
     p = np.log2(abs(norm1 / norm2))
     # p = np.log(norm1/norm2)/np.log(2)
     return p
@@ -194,7 +194,7 @@ def rusanov_scheme_periodical(a, b, C, X, x_start, x_end, T, CFL, n0):
     return x0, h_n
 
 
-def rusanov_scheme_third_task(a, b, C, X, x_start, x_end,  delta_t, delta_x, n0, time_steps):
+def rusanov_scheme_third_task(a, b, C, X, x_start, x_end, delta_t, delta_x, n0, time_steps):
     global g
     n = n0
     x0 = np.linspace(x_start, x_end, n)
