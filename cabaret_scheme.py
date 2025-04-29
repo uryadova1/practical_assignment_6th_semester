@@ -1,46 +1,106 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 g = 10
 
 
 def initial_condition_u(x):
-    return np.array([-0.5 if xi < 1 or xi > 2 else -2 for xi in x])
+    return np.array([0.5 if xi < 1 or xi > 2 else 2 for xi in x])
 
 
-def F_func(q, h):
+def Fu(u):
     global g
-    return np.array(q ** 2 / h + g * h ** 2 / 2)  # приведено к виду q^2/h+gh^2/2, чтобы не использовать u
+    return u ** 2 / 2
 
 
 # f = u^2/2?
 
+def F(m, M, u):
+    n = len(u)
+    new_arr = list()
+    for i in range(n):
+        if m[i] <= u[i] <= M[i]:
+            new_arr.append(u[i])
+        elif u[i] < m[i]:
+            new_arr.append(m[i])
+        else:
+            new_arr.append(M[i])
+    return np.array(new_arr)
 
-def lambda_func(q, h):
-    return q / h #lambda = u
 
 
-def min_and_max_m(u1, u2, u3):
-    min_m = min(u1, u2, u3)
-    max_m = max(u1, u2, u3)
-    return min_m, max_m
+def first_and_third_step(u, f, tau, h):
+    return u - tau / 2 * (f[1:] - f[:-1]) / h
 
 
-def cabaret_scheme(h_n, q_n, tau, h):
-    # первый шаг
-    f_1 = F_func(q_n, h_n)
-    h_1 = tau / 2 * ((q_n[:-1] - q_n[1:]) / h) + h_n  # h, q
-    q_1 = tau / 2 * ((f_1[:-1] - f_1[1:]) / h) + q_n  # q, q^2/h+gh^2/2
+def find_min_m(u1, u2):
+    n = len(u1)
+    m = list()
+    for i in range(n):
+        m.append(min(u1[i], u2[i], u2[i + 1]))
+        print(m[-1])
+    return np.array(m)
 
-    f_2 = F_func(q_1, h_1)
+def find_max_m(u1, u2):
+    n = len(u1)
+    m = list()
+    for i in range(n):
+        m.append(max(u1[i], u2[i], u2[i + 1]))
+    return np.array(m)
 
-    # второй шаг
-    lambda_minus_05 = lambda_func(q_1[:-1], h_1[:-1])
-    lambda_plus_05 = lambda_func(q_1[1:], h_1[1:])
-    if lambda_minus_05 > 0 and lambda_plus_05 >= 0:
-        h_2 = 2 * (h_1[:-1]) - h_n[:-1]  # h
-        q_2 = 2 * (q_1[:-1]) - q_n[:-1]  # q
-        min_m, max_m = min_and_max_m()
-    elif lambda_minus_05 <= 0 and lambda_plus_05 < 0:
-        h_2 = 2 * (h_1[1:]) - h_n[1:]  # h
-        q_2 = 2 * (q_1[1:]) - q_n[1:]  # q
-        min_m, max_m = min_and_max_m()
+
+
+def second_step(u_c, u_s, uU):
+    u_n1, m, M = 0, 0, 0
+    # if all(i > 0 for i in u_c[:-1]) and all(i >= 0 for i in u_c[1:]):
+    u_n1 = 2 * u_c - u_s[:-1]
+    m = find_min_m(uU, u_s)
+    M = find_max_m(uU, u_s)
+    # elif all(i <= 0 for i in u_con[:-1]) and all(i < 0 for i in u_con[1:]):
+    u_n1 = F(m, M, u_n1)
+    u_n1 = np.concatenate([[u_s[0]], u_n1])
+    # print(u_s[0], u_n1[0])
+    return u_n1
+
+
+def cabaret_scheme(u_n_con, u_n_str, tau, h):
+    f_n = Fu(u_n_str)
+    u_n12_j_12 = first_and_third_step(u_n_con, f_n, tau, h)
+    u_n1_j = second_step(u_n12_j_12, u_n_str, u_n_con)
+    f_n1_j1 = Fu(u_n1_j)
+    u_n1_j12 = first_and_third_step(u_n12_j_12, f_n1_j1, tau, h)
+    return u_n1_j12, u_n1_j
+
+def graphics(x1, u1):
+    plt.figure(figsize=(10, 6))
+    plt.plot(x1, u1,"k o", markersize=3)
+    # plt.plot(x2, u2, linestyle="o")
+    plt.xlabel("x")
+    plt.ylabel("h(x, t)")
+    # plt.legend()
+    plt.grid()
+    plt.show()
+
+if __name__ == "__main__":
+    x0 = 0
+    X = 5
+    x1 = x0 + X
+    h = 0.1
+    N = int((x1 - x0)  / h) # ячейки
+    tau = 0.0125 * 2
+    x_str = np.linspace(x0, x1, N + 1)
+    x_con = np.linspace(x0 + h / 2, x1 - h / 2, N)
+    u_con0 = initial_condition_u(x_con)
+    u_str0 = initial_condition_u(x_str)
+    time_steps = 64
+
+    print(u_str0, u_con0)
+
+    print(f"fdt/dx {tau/h}")
+
+    u_con, u_str = u_con0.copy(), u_str0.copy()
+    for i in range(time_steps):
+        u_con, u_str = cabaret_scheme(u_con, u_str, tau, h)
+        if i == 31:
+            # print(u_str[0], u_str[1])
+            graphics(x_con, u_con)
